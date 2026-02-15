@@ -7,7 +7,7 @@
     "homepage": "https://github.com/Night-Sky-Studio/pom-pom",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Night-Sky-Studio/pom-pom.git"
+        "url": "git+https://github.com/Night-Sky-Studio/pom-pom.git"
     },
     "bugs": {
         "url": "https://github.com/Night-Sky-Studio/pom-pom/issues"
