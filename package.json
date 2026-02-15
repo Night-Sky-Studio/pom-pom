@@ -26,6 +26,10 @@
     "files": [
         "src"
     ],
+    "exports": {
+        ".": "./src/index.ts",
+        "./middleware": "./src/middlewares/index.ts"
+    },
     "devDependencies": {
         "@types/bun": "latest"
     },
