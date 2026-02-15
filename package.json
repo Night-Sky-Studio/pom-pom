@@ -1,6 +1,6 @@
 {
     "name": "@interknot/pom-pom",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Express-like wrapper for Bun's HTTP server",
     "author": "Night Sky Studio (Konstantin Romanets)",
     "license": "Apache-2.0",
