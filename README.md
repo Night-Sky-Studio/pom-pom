@@ -32,7 +32,7 @@ app.listen(3000, () => {
 ## Middlewares
 Supported middlewares: `cors`
 ```ts
-import { cors } from "@interknot/pom-pom/middlewares"
+import { cors } from "@interknot/pom-pom/middleware"
 
 app.use(cors({
     origin: "https://example.com"
