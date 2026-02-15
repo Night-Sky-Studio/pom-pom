@@ -8,6 +8,11 @@
 ## Disclaimer
 This project will not work in Node.js, it's built specifically for Bun. If you want an Express-like framework for Node.js, consider using Express itself or Fastify.
 
+## Installation
+```sh
+bun install @interknot/pom-pom
+```
+
 ## Usage
 Use it exactly as you would use Express.js.
 ```ts
@@ -27,7 +32,7 @@ app.listen(3000, () => {
 ## Middlewares
 Supported middlewares: `cors`
 ```ts
-import { cors } from "./server/middlewares"
+import { cors } from "@interknot/pom-pom/middlewares"
 
 app.use(cors({
     origin: "https://example.com"
@@ -37,7 +42,7 @@ app.use(cors({
 ## Router
 PomPom includes a file-system based router that follows Next.js style routing.
 ```ts
-import { registerRoutes } from "@interknot/pom-pom"
+import { PomPom, registerRoutes } from "@interknot/pom-pom"
 
 const app = new PomPom()
 
