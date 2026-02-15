@@ -6,7 +6,7 @@ Bun.serve({
     routes: {
         "/": {
             GET: (req) => {
-                return new Response(`Inter-knot data server. Version ${pkg.version}`)
+                return new Response(`Test server. Version ${pkg.version}`)
             }
         },
         "/:id": {
