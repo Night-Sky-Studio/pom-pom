@@ -76,6 +76,7 @@ Supported HTTP methods: `GET`, `POST`, `PUT`, `DELETE`, `PATCH`, `OPTIONS`
 import type { PomRequest, PomResponse } from "@interknot/pom-pom"
 
 // For params and query to appear - specify them in PomRequest generic type
+// ":id?name&age&gender" works too
 export async function get(req: PomRequest<":id/?name&age&gender">, res: PomResponse) {
     const { id } = req.params
     const { name, age, gender } = req.query
