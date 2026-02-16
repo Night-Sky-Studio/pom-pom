@@ -1,14 +1,26 @@
 import Bun, { type BunRequest } from "bun"
 
 type ExtractSearchParams<S extends string> = S extends `${infer _}?${infer Q}` ? Q : ""
-type SplitParams<Q extends string> = Q extends `${infer K}&${infer R}` 
-    ? { [key in K | keyof SplitParams<R>]: string } 
-    : Q extends `${infer K}` 
+type SplitParams<Q extends string> = Q extends `${infer K}&${infer R}`
+    ? { [key in K | keyof SplitParams<R>]: string }
+    : Q extends `${infer K}`
         ? { [key in K]: string } : {}
 type ParseSearchParams<S extends string> = SplitParams<ExtractSearchParams<S>>
 
+type StripQuery<T extends string> = T extends `${infer Path}?${string}` ? Path : T
+
+type ExtractRouteParams<T extends string> = string extends T
+    ? Record<string, string>
+    : StripQuery<T> extends `${string}:${infer Param}/${infer Rest}`
+    ? { [K in Param]: string } & ExtractRouteParams<Rest>
+    : StripQuery<T> extends `${string}:${infer Param}`
+        ? { [K in Param]: string }
+        : StripQuery<T> extends `${string}*`
+        ? {}
+        : {};
+
 export type RouteParams<R extends string = string> = { 
-    [Key in keyof Bun.Serve.ExtractRouteParams<R>]: Bun.Serve.ExtractRouteParams<R>[Key] 
+    [Key in keyof ExtractRouteParams<R>]: ExtractRouteParams<R>[Key] 
 } & {}
 
 export type QueryParams<S extends string = string> = {

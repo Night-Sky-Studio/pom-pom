@@ -1,5 +1,5 @@
 import Bun, { type MaybePromise, type BunRequest } from "bun"
-import { PomRequest, type RouteParams } from "./Request"
+import { PomRequest } from "./Request"
 import { PomOptions } from "./Options"
 import { PomResponse } from "./Response"
 
