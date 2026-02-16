@@ -24,6 +24,15 @@ app.get("/hello", (req, res) => {
     return res.text("Hello, world!")
 })
 
+app.get("/user/:id?name&age&gender", (req, res) => {
+    // Params and Query are destructured from url
+    // Fully typed and autocompleted in IDEs
+    const { id } = req.params
+    const { name, age, gender } = req.query
+
+    return res.json({ id, name, age, gender })
+})
+
 app.listen(3000, () => {
     console.log("Server is running on http://localhost:3000")
 })
@@ -46,7 +55,7 @@ import { PomPom, registerRoutes } from "@interknot/pom-pom"
 
 const app = new PomPom()
 
-registerRoutes(app, "./routes")
+await registerRoutes(app, "./routes") 
 ```
 ### Example directory structure
 ```
@@ -66,9 +75,11 @@ Supported HTTP methods: `GET`, `POST`, `PUT`, `DELETE`, `PATCH`, `OPTIONS`
 // /routes/api/users/[id].ts
 import type { PomRequest, PomResponse } from "@interknot/pom-pom"
 
-export async function get(req: PomRequest, res: PomResponse) {
-    const userId = req.params.id
-    return res.json({ id: userId, name: "User " + userId })
+// For params and query to appear - specify them in PomRequest generic type
+export async function get(req: PomRequest<":id/?name&age&gender">, res: PomResponse) {
+    const { id } = req.params
+    const { name, age, gender } = req.query
+    return res.json({ id, name, age, gender })
 }
 
 export async function post(req: PomRequest, res: PomResponse) {
@@ -85,10 +96,10 @@ export async function put(req: PomRequest, res: PomResponse) {
 
 // Note: 'delete' is a reserved keyword in JavaScript/TypeScript, 
 // so we use '_delete' instead
-export async function _delete(req: PomRequest, res: PomResponse) {
-    const userId = req.params.id
+export async function _delete(req: PomRequest<":id">, res: PomResponse) {
+    const { id } = req.params
     // Delete user...
-    return res.json({ success: true, id: userId })
+    return res.json({ success: true, id })
 }
 
 export async function patch(req: PomRequest, res: PomResponse) {
